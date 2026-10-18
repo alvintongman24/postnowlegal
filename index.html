@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +5,181 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>PostNow - Legal Information</title>
   <meta name="description" content="Official PostNow website with links to our Privacy Policy and Terms of Service.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Manrope:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --white: #fff;
+      --ink: #0a0a0a;
+      --mist: rgba(255,255,255,.62);
+      --glass: rgba(255,255,255,.06);
+      --glass-strong: rgba(255,255,255,.1);
+      --edge: rgba(255,255,255,.16);
+      --serif: "Instrument Serif", "Times New Roman", Georgia, serif;
+      --sans: "Manrope", "Helvetica Neue", Arial, sans-serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { min-height: 100%; }
+    body {
+      background: #000;
+      color: var(--white);
+      font-family: var(--sans);
+      font-weight: 300;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* soft white light behind the glass */
+    .glow { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+    .glow i {
+      position: absolute; border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,.24), rgba(255,255,255,0) 70%);
+      filter: blur(40px);
+      animation: drift 18s ease-in-out infinite alternate;
+    }
+    .glow i:nth-child(1) { width: 60vmax; height: 60vmax; top: -22vmax; left: -18vmax; }
+    .glow i:nth-child(2) { width: 46vmax; height: 46vmax; bottom: -16vmax; right: -16vmax; opacity: .7; animation-delay: -6s; }
+    .glow i:nth-child(3) { width: 30vmax; height: 30vmax; top: 30vh; left: 52vw; opacity: .35; animation-delay: -12s; }
+    @keyframes drift { from { transform: translate3d(0,0,0); } to { transform: translate3d(3vmax,2vmax,0) scale(1.08); } }
+
+    /* header */
+    header {
+      position: fixed; top: 16px; left: 50%; transform: translateX(-50%);
+      z-index: 10; width: min(920px, calc(100% - 32px));
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 12px 22px;
+      background: var(--glass);
+      border: 1px solid var(--edge);
+      border-radius: 999px;
+      -webkit-backdrop-filter: blur(22px) saturate(160%);
+      backdrop-filter: blur(22px) saturate(160%);
+    }
+    .brand { font-family: var(--serif); font-size: 1.5rem; color: var(--white); text-decoration: none; }
+    nav { display: flex; gap: 22px; }
+    nav a { color: var(--mist); text-decoration: none; font-size: .85rem; letter-spacing: .02em; transition: color .25s; }
+    nav a:hover { color: var(--white); }
+
+    main {
+      position: relative; z-index: 1;
+      flex: 1;
+      width: min(920px, calc(100% - 32px));
+      margin: 0 auto;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 140px 0 60px;
+    }
+
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 12px;
+      font-size: .78rem; letter-spacing: .18em; text-transform: uppercase; color: var(--mist);
+      margin-bottom: 28px;
+    }
+    .eyebrow::before { content: ""; width: 40px; height: 1px; background: var(--edge); }
+
+    h1 {
+      font-family: var(--serif); font-weight: 400;
+      font-size: clamp(4.5rem, 16vw, 11rem);
+      line-height: .9; letter-spacing: -.03em;
+    }
+    h1 em { font-style: italic; color: var(--mist); }
+    .lead { margin-top: 28px; max-width: 480px; font-size: 1.1rem; color: var(--mist); }
+
+    /* link cards */
+    .cards { margin-top: 64px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .card {
+      position: relative; display: flex; flex-direction: column; justify-content: space-between;
+      min-height: 210px; padding: 30px;
+      color: var(--white); text-decoration: none;
+      background: linear-gradient(145deg, var(--glass-strong), var(--glass));
+      border: 1px solid var(--edge);
+      border-radius: 26px;
+      -webkit-backdrop-filter: blur(26px) saturate(160%);
+      backdrop-filter: blur(26px) saturate(160%);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.18), 0 30px 80px rgba(0,0,0,.5);
+      transition: transform .45s cubic-bezier(.2,.8,.2,1), background .45s, color .45s, border-color .45s;
+    }
+    .card .num { font-size: .8rem; letter-spacing: .14em; color: var(--mist); transition: color .45s; }
+    .card h2 { font-family: var(--serif); font-weight: 400; font-size: clamp(1.9rem, 4vw, 2.5rem); line-height: 1.1; margin-top: 18px; }
+    .card p { margin-top: 8px; font-size: .95rem; color: var(--mist); max-width: 30ch; transition: color .45s; }
+    .card .arrow {
+      align-self: flex-end; width: 44px; height: 44px; border-radius: 50%;
+      border: 1px solid var(--edge);
+      display: grid; place-items: center; font-size: 1.1rem;
+      transition: transform .45s cubic-bezier(.2,.8,.2,1), background .45s, color .45s, border-color .45s;
+    }
+    .card:hover, .card:focus-visible {
+      transform: translateY(-6px);
+      background: rgba(255,255,255,.94);
+      color: var(--ink);
+      border-color: rgba(255,255,255,.95);
+    }
+    .card:hover .num, .card:hover p, .card:focus-visible .num, .card:focus-visible p { color: rgba(0,0,0,.6); }
+    .card:hover .arrow, .card:focus-visible .arrow { background: var(--ink); color: var(--white); border-color: var(--ink); transform: rotate(-45deg); }
+    a:focus-visible { outline: 2px solid var(--white); outline-offset: 4px; }
+
+    footer { position: relative; z-index: 1; text-align: center; padding: 30px 16px 44px; color: var(--mist); font-size: .85rem; }
+    footer b { font-family: var(--serif); font-weight: 400; font-size: 1.3rem; color: var(--white); margin-right: 8px; }
+
+    /* gentle entrance */
+    .rise { opacity: 0; transform: translateY(24px); animation: rise 1.1s cubic-bezier(.2,.8,.2,1) forwards; }
+    .rise.d1 { animation-delay: .1s; } .rise.d2 { animation-delay: .25s; }
+    .rise.d3 { animation-delay: .4s; } .rise.d4 { animation-delay: .55s; }
+    @keyframes rise { to { opacity: 1; transform: none; } }
+
+    @media (max-width: 680px) {
+      .cards { grid-template-columns: 1fr; }
+      nav { display: none; }
+      .card { min-height: 180px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .rise { animation: none; opacity: 1; transform: none; }
+      .glow i { animation: none; }
+      .card, .card .arrow { transition: none; }
+    }
+  </style>
 </head>
 <body>
-  <h1>PostNow</h1>
-  <p>Official legal information for PostNow.</p>
-  <p><a href="privacy.html">Privacy Policy</a></p>
-  <p><a href="terms.html">Terms of Service</a></p>
+
+  <div class="glow" aria-hidden="true"><i></i><i></i><i></i></div>
+
+  <header>
+    <a class="brand" href="/">PostNow</a>
+    <nav>
+      <a href="privacy.html">Privacy Policy</a>
+      <a href="terms.html">Terms of Service</a>
+    </nav>
+  </header>
+
+  <main>
+    <span class="eyebrow rise d1">Legal Information</span>
+    <h1 class="rise d2">Post<em>Now</em></h1>
+    <p class="lead rise d3">Official legal information for PostNow.</p>
+
+    <div class="cards rise d4">
+      <a class="card" href="privacy.html">
+        <div>
+          <span class="num">01</span>
+          <h2>Privacy Policy</h2>
+          <p>How we collect, use, and protect your information.</p>
+        </div>
+        <span class="arrow" aria-hidden="true">&rarr;</span>
+      </a>
+      <a class="card" href="terms.html">
+        <div>
+          <span class="num">02</span>
+          <h2>Terms of Service</h2>
+          <p>The rules for using the PostNow platform.</p>
+        </div>
+        <span class="arrow" aria-hidden="true">&rarr;</span>
+      </a>
+    </div>
+  </main>
+
+  <footer><b>PostNow</b> &copy; 2026</footer>
+
 </body>
 </html>
